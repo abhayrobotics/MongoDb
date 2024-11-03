@@ -47,13 +47,75 @@ Frontend Request => Backend (Nodejs) => MongoDB Server => Storage Engine(WiredTi
 ## Managing Database
 
 ### Show all DBs
-    - show dbs
+    - show dbs 
+    or
+    - show databases
+
 ### Creating database
     - use <DaTabase Name>
 
 ### Delete Database
-    - db.dropDatabase();
+    - db.dropDatabase()
  
 ### Show Collections
     - show collections
 
+### Create Collections
+    - db.createCollection('<Collection-name>')
+
+### Delete Collections
+    - db.<collection-name>.drop()
+
+- Untill a single collection in not present in the created database , show dbs will not show the name of created datbase.
+
+### Example
+
+````
+use Students
+switched to db Students
+Students> db.createCollection('DATA')
+{ ok: 1 }
+Students> show collections
+DATA
+Students> show dbs
+Students    8.00 KiB
+admin      40.00 KiB
+config    108.00 KiB
+local      40.00 KiB
+Students> show collections
+DATA
+Students> db.DATA.drop()
+true
+Students> show dbs
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+Students> show dbs
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+Students> db.dropDatabase()
+{ ok: 1, dropped: 'Students' }
+````
+
+### Inserting one Document
+    - db.<collection-name>.insertOne({
+        field1: value1,
+        field2: value2,
+        ...
+    })
+
+### Insert Multiple Documents
+    - db.<collection-name>.insertMany([
+        {
+        field1: value1,
+        field2: value2,
+        ...
+        },
+        {
+        field1: value1,
+        field2: value2,
+        ...
+        },
+    ...
+    ])
